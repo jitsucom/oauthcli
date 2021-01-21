@@ -18,3 +18,5 @@ or
 chmod +x authorizer.py
 ./authorizer.py --client_id=<CLIENT_ID> --client_secret=<CLIENT_SECRET>
 ```
+
+After execution, press CTRL+C to stop server

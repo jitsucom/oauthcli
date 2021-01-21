@@ -14,7 +14,7 @@ from flask import request
 
 client_id = ""
 client_secret = ""
-PORT = 5000
+port = 5000
 
 GET_CODE_ENDPOINT = '/oauth'
 first_call_executed = False
@@ -37,7 +37,7 @@ def exchange_for_auth_token():
         'client_secret': client_secret,
         'code': response_data['code'],
         'grant_type': 'authorization_code',
-        'redirect_uri': f'http://localhost:{PORT}{GET_CODE_ENDPOINT}'
+        'redirect_uri': f'http://localhost:{port}{GET_CODE_ENDPOINT}'
     }
     url = urlunsplit(('https', "oauth2.googleapis.com", '/token', urlencode(parameters), ""))
     resp = requests.post(url)
@@ -51,7 +51,7 @@ def send_auth_request():
     if not first_call_executed:
         parameters = {
             'client_id': client_id,
-            'redirect_uri': f'http://localhost:{PORT}{GET_CODE_ENDPOINT}',
+            'redirect_uri': f'http://localhost:{port}{GET_CODE_ENDPOINT}',
             'response_type': 'code',
             'scope': 'https://www.googleapis.com/auth/analytics.readonly',
             'access_type': 'offline',
@@ -70,7 +70,8 @@ def start_runner():
         while not_started:
             print('In start loop')
             try:
-                r = requests.get(f'http://localhost:{PORT}/')
+                url = f'http://localhost:{port}/'
+                r = requests.get(url)
                 if r.status_code == 200:
                     print('Server started, quiting start_loop')
                     not_started = False
@@ -89,8 +90,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Firebase tools.')
     parser.add_argument("--client_id", help='Google client_id', required=True)
     parser.add_argument("--client_secret", help='Google client_secret', required=True)
+    parser.add_argument("--port", help='Port to run application, 5000 by default', required=False, default=5000)
     args = parser.parse_args()
     client_id = args.client_id
     client_secret = args.client_secret
+    port = args.port
     start_runner()
     app.run()
