@@ -19,4 +19,10 @@ chmod +x authorizer.py
 ./authorizer.py --client_id=<CLIENT_ID> --client_secret=<CLIENT_SECRET>
 ```
 
+If the default port 5000 is used on your machine, you can specify the required one as parameter, for example:
+```shell script
+./authorizer.py --client_id=<CLIENT_ID> --client_secret=<CLIENT_SECRET> --port=8000
+``` 
+will start the server on 8000 port.
+
 After execution, press CTRL+C to stop server
