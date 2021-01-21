@@ -15,6 +15,7 @@ from flask import request
 client_id = ""
 client_secret = ""
 port = 5000
+scope = 'https://www.googleapis.com/auth/analytics.readonly'
 
 GET_CODE_ENDPOINT = '/oauth'
 first_call_executed = False
@@ -53,7 +54,7 @@ def send_auth_request():
             'client_id': client_id,
             'redirect_uri': f'http://localhost:{port}{GET_CODE_ENDPOINT}',
             'response_type': 'code',
-            'scope': 'https://www.googleapis.com/auth/analytics.readonly',
+            'scope': scope,
             'access_type': 'offline',
             'prompt': 'consent'
         }
@@ -87,10 +88,12 @@ def start_runner():
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Firebase tools.')
+    parser = argparse.ArgumentParser(description='OAuth tool')
     parser.add_argument("--client_id", help='Google client_id', required=True)
     parser.add_argument("--client_secret", help='Google client_secret', required=True)
     parser.add_argument("--port", help='Port to run application, 5000 by default', required=False, default=5000)
+    parser.add_argument("--scope", help='OAuth scope (default is https://www.googleapis.com/auth/analytics.readonly)', required=False, default='https://www.googleapis.com/auth/analytics.readonly')
+    
     args = parser.parse_args()
     client_id = args.client_id
     client_secret = args.client_secret
