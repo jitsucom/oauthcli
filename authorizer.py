@@ -97,6 +97,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     client_id = args.client_id
     client_secret = args.client_secret
+    scope = args.scope
     port = args.port
     start_runner()
     app.run()

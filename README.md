@@ -41,6 +41,11 @@ If the default port 5000 is used on your machine, you can specify the required o
 ./authorizer.py --client_id=<CLIENT_ID> --client_secret=<CLIENT_SECRET> --port=8000
 ``` 
 
+Run with custom scopes:
+```shell script
+./authorizer.py --client_id=<CLIENT_ID> --client_secret=<CLIENT_SECRET> --scope='https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/spreadsheets.readonly'
+``` 
+
 Once script is started, the browser will be opened. Follow instructions and get a OAuth JSON secret at the end. Use `access_token` and `refresh_token`
 
 After execution, press CTRL+C to stop server
