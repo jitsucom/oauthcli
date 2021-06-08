@@ -1,17 +1,19 @@
 # Overview
 
 This is a tool to help you obtain OAuth2 tokens for services (so far, only Google is supported). The tool is useful for command-line
-applications working with APIs where OAuth2 is the only method of authorization (example [EventNative](https://github.com/jitsucom/eventnative) — connections to [Firebase](https://docs.eventnative.org/configuration-1/sources-configuration/firebase), [Google Analytics](https://docs.eventnative.org/configuration-1/sources-configuration/google-analytics), [Google Play](https://docs.eventnative.org/configuration-1/sources-configuration/google-play), etc). Likewise, it could be useful for debugging.
+applications working with APIs where OAuth2 is the only method of authorization (example [Jitsu](https://github.com/jitsucom/jitsu) — connections to [Firebase](https://docs.eventnative.org/configuration-1/sources-configuration/firebase), [Google Analytics](https://docs.eventnative.org/configuration-1/sources-configuration/google-analytics), [Google Play](https://docs.eventnative.org/configuration-1/sources-configuration/google-play), etc). Likewise, it could be useful for debugging.
 
 To run scripts, you need client_secret and client_id (find them at credentials settings of your application at Google console).
 For more info about Google OAuth2 configuration, see [documentation](https://developers.google.com/identity/protocols/oauth2/web-server#httprest_4) 
 
 # Configuring oauth for Google
 
+At first you should get certain scopes for using Google API from [Google documentation](https://developers.google.com/identity/protocols/oauth2/scopes).
+
 To run scripts you need to obtain client_secret and client_id, and add authorized redirect URL
  * Go to [Google API console](https://console.developers.google.com/). Make sure that you selected a correct google account (top-right corner) and correct project (top-left corner)
  * Go to Credentials section
- * Create a new client under "OAuth 2.0 Client IDs" section (or reuse an existing one). The type of Client should be "Web Application"
+ * Create a new client under "OAuth 2.0 Client IDs" section (or reuse an existing one). The type of Client should be "Web Application" (or "Desktop" if you are using CLI)
  * Open Client ID settings, add http://localhost to "Authorized Origin" 
  * Add https://localhost:5000 to "Authorized redirect URIs". Change 5000 to other port if you're going to use non-standart port
  
